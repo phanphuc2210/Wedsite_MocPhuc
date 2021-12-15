@@ -1,0 +1,71 @@
+{{> header parameter=customer}}
+
+<div class="container">
+    <div class="row my-4">
+        <div class="col-lg-7">
+            <img src="{{product.IMG}}" alt="{{product.TENSP}}" width="100%">
+        </div>
+        <div class="col-lg-5">
+            <h1 >{{product.TENSP}}</h1>
+            <span class="font-weight-bold">Mã sản phẩm:</span>
+            <span id="idsp">{{product.IDSP}}</span>
+            <p class="text-justify mt-2">{{product.MOTA}}</p>
+            <div class="form-group">
+                <label for="soluong" class="font-weight-bold mr-2">Số lượng:</label>
+                <span class='btn font-weight-bold' onclick='handleDecrease()'>-</span>
+                <input class="d-inline form-control w-25" id="soluong" type="text" value="1">
+                <span class='btn font-weight-bold' onclick='handleIncrease()'>+</span>
+                {{!-- <label for="soluong" class="font-weight-bold">Số lượng:</label>
+                <select class="form-control" id="soluong">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option> 
+                </select>--}}
+            </div>
+            <p class="font-weight-bold">Giá bán: {{product.GIABAN}} vnđ</p>
+            <button onclick="addCart()" class="btn btn-dark mt-5 w-100">Thêm vào giỏ hàng</button>
+        </div>
+    </div>
+    <div class="my-5">
+        <h3>Bình luận</h3>
+        <form method="POST" action="/products/{{product.IDLSP}}/{{product.IDSP}}">
+            <div class="form-group">
+                <label for="noidungbl"><h6>Để lại bình luận tại đây:</h6></label>
+                <input type="text" class="form-control" id="noidungbl" name="noidungbl" placeholder="Bình luận gì đó ....">
+            </div>
+            <button type="submit" class="btn btn-dark">Đăng</button>
+        </form>
+        {{#each comments}}
+        <div class="my-2">
+            <p class="font-weight-bold mb-0">{{this.TEN}}</p>
+            <p class="mt-0">{{this.NOIDUNGBL}}</p>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<script>
+    function addCart() {
+        $.ajax({
+            url: '/me/addCart',
+            type: 'POST',
+            data: {
+                idsp: $('#idsp').html(),
+                soluong: $('#soluong').val()
+            }
+        }).then(() => {
+            location.assign('/me/cart')
+        })
+    }
+
+    
+    const handleIncrease = () => {
+        $('#soluong').val(parseInt($('#soluong').val()) + 1)
+    }
+    const handleDecrease = () => {
+    if ($('#soluong').val() > 1)
+        $('#soluong').val(parseInt($('#soluong').val()) - 1)
+    }
+</script>

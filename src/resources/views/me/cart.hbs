@@ -1,0 +1,65 @@
+{{> header parameter=customer}}
+
+<div class="container mt-4 height-container-short">
+        <h3>Giỏ hàng</h3>
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                <th scope="col">Mã sản phẩm</th>
+                <th scope="col">Image</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Giá bán</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#if cart}}
+                {{#each cart}}
+                <tr>
+                    <th scope="row">{{this.IDSP}}</th>
+                    <td><img src="{{this.IMG}}" alt="{{this.TENSP}}" width="40px"></td>
+                    <td>{{this.TENSP}}</td>
+                    <td>{{this.SOLUONG}}</td>
+                    <td>{{this.TONGGIA}} vnđ</td>
+                    <td><button onclick="detroy({{this.IDSP}})" class="btn btn-dark">Xóa</button></td>
+                </tr>
+                {{/each}}
+                {{else}}
+                <tr>
+                    <td colspan="6" class="text-center">
+                        Bạn chưa có sản phẩm nào.
+                    </td>
+                </tr>
+                {{/if}}
+            </tbody>
+        </table>
+        <div class="mt-5">
+            <h6>Tổng giá giỏ hàng: {{totalPrice.TONGGIAGH}} vnđ</h6>
+            <form method="POST" action="/me/cart/order">
+                <div class="form-group">
+                    <label for="noigiao">Địa chỉ giao hàng:</label>
+                    <input type="text" class="form-control" id="noigiao" name="noigiao" value="{{customer.DIACHI}}">
+                </div>
+                
+                <button type="submit" class="btn btn-dark">Đặt mua</button>
+            </form>
+        </div>
+</div>
+
+<script>
+    function detroy(idsp) {
+        $.ajax({
+            url: '/me/cart/:idsp?_method=DELETE',
+            type: 'POST',
+            data: {
+                idsp: idsp
+            }
+        }).then(() => {
+            location.reload()
+        })
+    }
+
+</script>
+
+

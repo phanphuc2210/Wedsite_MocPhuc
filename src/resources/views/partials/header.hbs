@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark nail">
+  <div class="container">
+      <a class="navbar-brand" href="/"><h2>Mộc Phúc</h2></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Trang chủ<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/aboutUs">Về chúng tôi</a>
+          </li> 
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Sản phẩm
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/products/1">Bàn</a>
+              <a class="dropdown-item" href="/products/2">Ghế</a>
+              <a class="dropdown-item" href="/products/3">Tủ</a>
+              <a class="dropdown-item" href="/products/4">Giường</a>
+              <a class="dropdown-item" href="/products/5">Kệ</a>
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          {{#if customer}}
+          <li class="nav-item">
+            <img class="avatar" src="{{customer.AVATAR}}" alt="{{customer.TEN}}">
+          </li> 
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{customer.TEN}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/me/info">Thông tin cá nhân</a>
+              <a class="dropdown-item" href="/me/receipt">Hóa đơn</a>
+              <div class="dropdown-divider"></div>
+              <span onclick="logout()" class="dropdown-item pointer">Đăng xuất</span>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/me/cart"><span class="oi oi-cart text-light"></span></a>
+          </li>
+          {{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Đăng kí</a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Đăng nhập</a>
+          </li>
+          {{/if}}
+        </ul>
+      </div>
+  </div>
+</nav>
+
+<script>
+
+  // hàm xóa cookie
+  function delete_cookie(name) {
+    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
+
+  function logout() {
+    delete_cookie('token')
+    location.assign("/")
+  }
+</script>

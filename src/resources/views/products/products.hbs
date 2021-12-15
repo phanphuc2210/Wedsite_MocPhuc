@@ -1,0 +1,23 @@
+{{> header parameter=customer}}
+
+<div class="container mt-4">
+        <div class="row">
+            {{#each products}}
+            <div class="col-sm-6 col-lg-4">
+                <div class="card mb-4" style="width: 18rem;">
+                    <a href="/products/{{this.IDLSP}}/{{this.IDSP}}">
+                        <img class="card-img-top" src="{{this.IMG}}" alt="{{this.TENSP}}">
+                    </a>
+                    <div class="card-body">
+                        <a href="/products/{{this.IDLSP}}/{{this.IDSP}}">
+                            <h3 class="card-title text-dark">{{this.TENSP}}</h3>
+                        </a>
+                        <p class="card-text text-justify">Sản phẩm hơi bị perfect, nhấn vào xem đi bạn ư!!!</p>
+                        <p class="font-weight-bold">Giá bán: {{this.GIABAN}} vnđ</p>
+                        <a href="/products/{{this.IDLSP}}/{{this.IDSP}}" class="btn btn-dark w-100">Xem ngay</a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+</div>

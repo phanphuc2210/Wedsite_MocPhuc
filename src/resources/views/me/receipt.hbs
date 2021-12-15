@@ -1,0 +1,49 @@
+{{> header parameter=customer}}
+
+<div class="container mt-4 height-container-short">
+        <h3>Hóa đơn</h3>
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                <th scope="col">Mã hóa đơn</th>
+                <th scope="col">Ngày đặt hàng</th>
+                <th scope="col">Ngày giao hàng</th>
+                <th scope="col">Nơi giao hàng</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#if receipts}}
+                {{#each receipts}}
+                <tr>
+                    <th scope="row">{{this.IDHD}}</th>
+                    <td>{{this.NGAYDATHANG}}</td>
+                    <td>{{this.NGAYGIAOHANG}}</td>
+                    <td>{{this.NOIGIAOHANG}}</td>
+                    <td><button onclick="detail({{this.IDHD}})" class="btn btn-dark">Chi tiết</button></td>
+                </tr>
+                {{/each}}
+                {{else}}
+                <tr>
+                    <td colspan="6" class="text-center">
+                        Bạn chưa có hóa đơn nào.
+                    </td>
+                </tr>
+                {{/if}}
+            </tbody>
+        </table>
+</div>
+
+<script>
+    function detail(idhd) {
+        $.ajax({
+            url: '/me/receipt/detail',
+            type: 'GET',
+            data: {
+                idhd: idhd
+            }
+        }).then(() =>{
+            location.assign('/me/receipt/detail?idhd=' + idhd)
+        })
+    }
+</script>

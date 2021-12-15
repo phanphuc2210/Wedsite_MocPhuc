@@ -1,0 +1,34 @@
+{{> header parameter=customer}}
+
+<div class="container mt-4 height-container-short">
+        <h3>Chi tiết hóa đơn</h3>
+        <h5>Mã hóa đơn: {{idhd}}</h5>
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                <th scope="col">Mã sản phẩm</th>
+                <th scope="col">Image</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Giá bán</th>
+                
+                </tr>
+            </thead>
+            <tbody> 
+                {{#each detail}}
+                <tr>
+                    <th scope="row">{{this.IDSP}}</th>
+                    <td><img src="{{this.IMG}}" alt="{{this.TENSP}}" width="40px"></td>
+                    <td>{{this.TENSP}}</td>
+                    <td>{{this.SOLUONG}}</td>
+                    <td>{{this.TONGGIA}} vnđ</td>
+                    
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+        <div class="mt-5">
+            <h6>Tổng giá hóa đơn: {{totalPrice.TONGGIAHD}} vnđ</h6>
+        </div>
+</div>

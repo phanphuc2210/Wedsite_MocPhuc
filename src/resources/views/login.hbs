@@ -1,0 +1,23 @@
+{{> header }}
+
+<div class="container height-container-short">
+    <form class="w-50 m-auto" method="POST" action="/login">
+        <div class="mt-4">
+            <h3>Đăng nhập</h3>
+        </div>
+        {{#if message}}
+        <p class="text-center" style="color: red;">{{message}}</p>
+        {{/if}}
+        <div class="mt-3">
+            <label for="tendn">Tên tài khoản</label>
+            <input type="text" class="form-control" id="tendn" name="tendn" placeholder="Nhập tên đăng nhập">
+        </div>
+        <div class="mt-3">
+            <label for="pass">Password</label>
+            <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-dark w-100 mt-3">Đăng nhập</button>
+    </form>
+</div>
+
+
